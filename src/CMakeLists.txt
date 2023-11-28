@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.25.1)
 
 project(CICDExperiment)
 
-set(CMAKE_CXX_FLAGS "-Wall -Wextra -Werror -Wfatal-errors")
+set(CMAKE_CXX_FLAGS "-std=gnu++20 -Wall -Wextra -Werror -Wfatal-errors")
 
 add_executable(${PROJECT_NAME} main.cpp)
 target_include_directories(${PROJECT_NAME}
