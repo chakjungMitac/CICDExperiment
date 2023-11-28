@@ -1,7 +1,14 @@
-#include <iostream>
+#include <glog/logging.h>  // LOG(*)
+
+#include "Card.h"
 
 int main() {
-    std::cout << "This is the CI/CD Experiment main()" << std::endl;
+    // Init glog
+    if (!google::IsGoogleLoggingInitialized()) {
+        FLAGS_logtostderr = true;  // Log messages to stderr instead of logfiles
+        google::InitGoogleLogging("CICDExperiment");
+    }
 
+    google::ShutdownGoogleLogging();
     return EXIT_SUCCESS;
 }
