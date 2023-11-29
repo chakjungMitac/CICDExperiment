@@ -17,7 +17,12 @@ int main() {
     std::chrono::time_point<std::chrono::high_resolution_clock> expireTime(
         std::chrono::sys_days{expireDate} + expireTimeOfDate.to_duration());
 
-    Card card(expireTime);
+    /**
+     * Card
+     *  ExpireTime: 2023/08/15 13:32:08
+     *  Balance   : 100
+     */
+    Card card(expireTime, 100);
     card.logInfo();
 
     google::ShutdownGoogleLogging();

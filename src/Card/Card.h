@@ -3,14 +3,21 @@
 #include <chrono>
 
 class Card {
-   public:
-    Card(std::chrono::time_point<std::chrono::high_resolution_clock> expireTime);
+   private:
+    typedef std::chrono::time_point<std::chrono::high_resolution_clock> ExpireTime;
 
-    const std::chrono::time_point<std::chrono::high_resolution_clock>&
-    getExpireTime();
+   public:
+    Card(const ExpireTime& expireTime, const int& balance);
+
+    const ExpireTime& getExpireTime();
+
+    const int& getBalance();
+    void setBalance(const int& balance);
 
     void logInfo();
 
    private:
-    std::chrono::time_point<std::chrono::high_resolution_clock> expireTime;
+    ExpireTime expireTime;
+
+    int balance;
 };

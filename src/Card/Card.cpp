@@ -4,13 +4,14 @@
 
 #include <glog/logging.h>  // LOG(*)
 
-Card::Card(std::chrono::time_point<std::chrono::high_resolution_clock> expireTime)
-    : expireTime(expireTime) {}
+Card::Card(const ExpireTime& expireTime, const int& balance)
+    : expireTime(expireTime), balance(balance) {}
 
-const std::chrono::time_point<std::chrono::high_resolution_clock>&
-Card::getExpireTime() {
-    return expireTime;
-}
+const Card::ExpireTime& Card::getExpireTime() { return expireTime; }
+
+const int& Card::getBalance() { return balance; }
+
+void Card::setBalance(const int& balance) { this->balance = balance; }
 
 void Card::logInfo() {
     LOG(INFO) << "=================== Card Info ===================";
@@ -20,6 +21,9 @@ void Card::logInfo() {
         std::chrono::high_resolution_clock::to_time_t(expireTime);
     LOG(INFO) << "ExpireTime: "
               << std::put_time(std::gmtime(&expireTime_time_t), "%F %T");
+
+    // Log balance
+    LOG(INFO) << "Balance: " << balance;
 
     LOG(INFO) << "=================================================";
 }
