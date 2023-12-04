@@ -56,3 +56,19 @@ TEST_F(CardTest, ExpireTime) {
         time += std::chrono::seconds(1);
     }
 }
+
+TEST_F(CardTest, Balance) {
+    EXPECT_EQ(31, card->getBalance());
+
+    // Positive
+    card->setBalance(85231);
+    EXPECT_EQ(85231, card->getBalance());
+
+    // Zero
+    card->setBalance(0);
+    EXPECT_EQ(0, card->getBalance());
+
+    // Negative
+    card->setBalance(-956381);
+    EXPECT_EQ(-956381, card->getBalance());
+}
