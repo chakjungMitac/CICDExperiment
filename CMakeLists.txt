@@ -10,4 +10,5 @@ set(CMAKE_CXX_FLAGS "-Wall -Wextra -Werror -Wfatal-errors")
 
 add_subdirectory(src)
 
+enable_testing()
 add_subdirectory(test)
