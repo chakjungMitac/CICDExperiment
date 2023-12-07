@@ -97,3 +97,18 @@ TEST_F(CardTest, CardStatus) {
     EXPECT_EQ(0, card->getTransitStationNums().InboundStation);
     EXPECT_EQ(0, card->getTransitStationNums().OutboundStation);
 }
+
+TEST_F(CardTest, TransitStationNums) {
+    EXPECT_EQ(0, card->getTransitStationNums().InboundStation);
+    EXPECT_EQ(0, card->getTransitStationNums().OutboundStation);
+
+    // TransitStationNums{123, 456}
+    card->setTransitStationNums(Card::TransitStationNums{123, 456});
+    EXPECT_EQ(123, card->getTransitStationNums().InboundStation);
+    EXPECT_EQ(456, card->getTransitStationNums().OutboundStation);
+
+    // TransitStationNums{0, 0}
+    card->setTransitStationNums(Card::TransitStationNums{0, 0});
+    EXPECT_EQ(0, card->getTransitStationNums().InboundStation);
+    EXPECT_EQ(0, card->getTransitStationNums().OutboundStation);
+}
