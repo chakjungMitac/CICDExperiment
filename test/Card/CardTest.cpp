@@ -72,3 +72,28 @@ TEST_F(CardTest, Balance) {
     card->setBalance(-956381);
     EXPECT_EQ(-956381, card->getBalance());
 }
+
+TEST_F(CardTest, CardStatus) {
+    EXPECT_EQ(Card::CardStatus::Normal, card->getCardStatus());
+
+    // InTransit
+    card->setCardStatus(Card::CardStatus::InTransit);
+    EXPECT_EQ(Card::CardStatus::InTransit, card->getCardStatus());
+
+    // Normal
+    card->setCardStatus(Card::CardStatus::Normal);
+    EXPECT_EQ(Card::CardStatus::Normal, card->getCardStatus());
+
+    // InTransit (TransitStationNums{108, 57})
+    card->setCardStatus(Card::CardStatus::InTransit);
+    card->setTransitStationNums(Card::TransitStationNums{108, 57});
+    EXPECT_EQ(Card::CardStatus::InTransit, card->getCardStatus());
+    EXPECT_EQ(108, card->getTransitStationNums().InboundStation);
+    EXPECT_EQ(57, card->getTransitStationNums().OutboundStation);
+
+    // Normal (TransitStationNums{0, 0})
+    card->setCardStatus(Card::CardStatus::Normal);
+    EXPECT_EQ(Card::CardStatus::Normal, card->getCardStatus());
+    EXPECT_EQ(0, card->getTransitStationNums().InboundStation);
+    EXPECT_EQ(0, card->getTransitStationNums().OutboundStation);
+}
