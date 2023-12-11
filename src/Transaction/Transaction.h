@@ -6,10 +6,18 @@ class Transaction {
    public:
     enum TransactionType { GateEntry, GateExit };
 
-    enum ProcessResult { Success, NotProcessed, CardExpired, InsufficientBalance };
+    enum ProcessResult {
+        Success,
+        NotProcessed,
+        CardExpired,
+        InsufficientBalance,
+        RepeatedEntry,
+        RepeatedExit
+    };
 
    public:
-    Transaction(const TransactionType& transactionType, const Card& card);
+    Transaction(const TransactionType& transactionType,
+                const unsigned int& stationNum, Card& card);
 
     const TransactionType& getTransactionType();
 
@@ -19,7 +27,11 @@ class Transaction {
    private:
     const TransactionType transactionType;
 
-    const Card& card;
+    const unsigned int stationNum;
+
+    Card& card;
 
     ProcessResult processResult = ProcessResult::NotProcessed;
+
+    unsigned int calculateFare();
 };
